@@ -1,5 +1,5 @@
 # generateur-de-mot-de-passe
 
-Cette code sert aux utilisateurs de créer une ou des mots de passes ALEATOIRES sans utiliser leurs identités ou des quelconques mots personnelles. 
+Ce code sert aux utilisateurs de créer un ou plusieurs mots de passes ALEATOIRES sans utiliser leur identité ni des mots personnels quelconques . 
 
-Pour l'executer: python generateur_de_mdp.py
+Pour l'exécuter : python generateur_de_mdp.py

@@ -1,14 +1,20 @@
-# Générateur de mdp aléatoire
-
 import random
 
 def welcome():
     print("Welcome to my password auto-generate")
-    print("The minimum length is 4")
+    print("What do you want?")
+    choice()
+
+
+def choice():
+    print()
+    print("Use the auto-generate?(1)")
+    print("Use some words you will provide?(2)")
+    print()
 
 
 def one_number():
-    return random.randint(0, 9)
+    return random.randint(1, 9)
 
 
 def special_character():
@@ -17,10 +23,10 @@ def special_character():
 
 def alphabet():
     return random.choice(["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"])    
+    
 
-
-def main():
-    welcome()
+def sub_main1():
+    print("The minimum length is 4")
     while True:
         length_request = int(input("What will the desired length be? : "))
         print("Length = {}".format(length_request))
@@ -32,6 +38,7 @@ def main():
             print("Too long")
             continue
         #A propos du nombre
+        print()
         number_request = input("Do you need number inside?(Y/n)").lower()
         if number_request == "y":
             if length_request < 6:
@@ -73,6 +80,7 @@ def main():
         elif number_request != "y":
             password = password
         #A propos du special caractère
+        print()
         print("Our specials characters are :", " ".join(["&", "#", "@", "$"]))
         special_request = input("Include special characters?(Y/n)").lower()
         if special_request == "y":
@@ -116,6 +124,7 @@ def main():
         elif special_request != "y":
             password = password
         #A propos du Majuscule et des lettres
+        print()
         upper_request = input("Include upper letter?(Y/n)").lower() 
         rest_length = length_request - len(password)#Reste de la longueur dispo
         array_letters = []
@@ -153,6 +162,7 @@ def main():
             password += array_letters
         random.shuffle(password)
         password = "".join(password)
+        print()
         print("Your password is : {}".format(password))
         print()
         after_result = input("Do you want this or make a new one?(Y/n)").lower()
@@ -160,6 +170,67 @@ def main():
             continue
         elif after_result != "y":
             print("It was a pleasure!")
+            break
+    
+
+def sub_main2():
+    print("Enter the word(s) you want to use and use space for mix well them")
+    print("You should enter, minimum 4 letters (space no include)")
+    while True:
+        password = []
+        request = input("Enter : ")
+        if len(request) < 4:
+            print("length incorrect")
+            continue
+        request = request.split(" ")
+        password += request
+        while True:
+            array_number = []
+            for i in range(0, random.randint(0,6), +1):
+                array_number += [str(one_number())]
+            password += array_number
+            special_character_list = "& # @ $"
+            print()
+            print("Our specials characters are {}".format(special_character_list))
+            special_request = input("Do you want special character?(Y/n)").lower()
+            if special_request == "y":
+                password += [special_character()]
+            random.shuffle(password)
+            password = "".join(password)    
+            print()
+            print("Your password is : {}".format(password))
+            print()
+            end_request = input("Do you like it or make a new one?(Y/n)").lower()
+            if end_request == "y":
+                password = password.split(" ")
+                continue
+            else:
+                print("It was a pleasure!")
+                break
+        break
+
+
+def main():
+    welcome()
+    while True:
+        request = int(input("Enter the number you want(1 or 2) "))
+        if request == 1 or request == 2:
+            print()
+            if request == 1:
+                sub_main1()
+            else:
+                sub_main2()
+        elif request != 1 or request != 2:
+            print("Error number, try again")
+            continue
+        print()
+        end_request = input("Do you want to make another choice?(Y/n)").lower()
+        if end_request == "y":
+            choice()
+            continue
+        else:
+            print()
+            print("Thank you for using the password auto-generate")
             break
 
 
